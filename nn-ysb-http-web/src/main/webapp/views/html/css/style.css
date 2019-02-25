@@ -1,0 +1,83 @@
+*{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	font-family:"微软雅黑";
+	outline:none;
+	font-size:14px;
+}
+
+a{
+	text-decoration:none;
+	font-family:"微软雅黑";
+	color:#6A6A6A;
+	font-weight:normal;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-column-rule-color: rgba(0,0,0,0);
+}
+
+html,body{
+	width:100%;
+	height:100%;
+	font-size:14px;
+	color: #333;
+    padding:0;
+    margin:0;
+}
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,a,span{ margin:0; padding:0; outline:0;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+input,select,textarea,button{outline:none; border: none;}
+h1,h2,h3,h4,h5,h6,button,input,select,textarea,b {font-size:100%; font-weight:normal;}
+i{font-style:normal;}
+input,button,select{-webkit-tap-highlight-color:rgba(255,255,255,0);}
+::-webkit-input-placeholder{
+	color:#999;
+	font-size:16px;
+}
+i{font-size: 18px;vertical-align: middle;}
+.clearfix:after {
+	content: "."; /**//*内容为“.”就是一个英文的句号而已。也可以不写。*/
+	display: block; /**//*加入的这个元素转换为块级元素。*/
+	clear: both; /**//*清除左右两边浮动。*/
+	visibility: hidden; /**//*可见度设为隐藏。注意它和display:none;是有区别的。visibility:hidden;仍然占据空间，只是看不到而已；*/
+	line-height: 0; /**//*行高为0；*/
+	height: 0; /**//*高度为0；*/
+	font-size:0; /**//*字体大小为0；*/
+}
+.clearfix { zoom:1;}
+body{height:100%;overflow:auto;position: relative;}
+/* 首页 */
+.index{background-image: -moz-linear-gradient( 90deg, rgb(255,255,255) 70%, rgb(210,238,215) 100%);background-image: -webkit-linear-gradient( 90deg, rgb(255,255,255) 70%, rgb(210,238,215) 100%);background-image: -ms-linear-gradient( 90deg, rgb(255,255,255) 70%, rgb(210,238,215) 100%);background-repeat: no-repeat;}
+.logo{width: 23%;margin: 0 auto;padding-top: 13%;box-sizing: border-box;}
+.logo img{width: 100%;}
+.logo_title{font-size: 16px;text-align: center;letter-spacing: 2px;}
+.pic{width: 70%; margin: 10% auto;margin-bottom: 0;}
+.pic img{width: 100%;}
+.reg{text-align: center;margin-bottom: 10%;}
+.reg button{width: 35%;font-size: 18px;padding: 2% 3%;box-sizing: border-box;color: #fff;background-color: #3bac74;box-shadow: 0px 10px 30px 0px rgba(59, 172, 117, 0.4);border-radius: 100px;letter-spacing:2px}
+/*注册*/
+#regForm,#codeForm{padding: 1rem;box-sizing: border-box;}
+#regForm input,#codeForm input{width: 100%;padding: 4% 5%;margin-bottom: 5%;background:#f5f5f5;box-sizing: border-box;border-radius: 10px;}
+.used{width: 100%;}
+#verificateCode{width: 55%!important;}
+.getCode{padding: 3% 5%;box-sizing: border-box; background: #028760;color: #fff;border-radius: 10px;margin-left: 5%;}
+.rule span{text-decoration: underline;cursor: pointer;}
+.rule .check{width: 5%;}
+.next,.sure{margin:10% 0;text-align: center;}
+.next button,.sure button{width: 80%;font-size: 18px;padding:4% 5%;box-sizing: border-box;color: #fff;background-color: #52b363;border-radius: 100px;letter-spacing:2px;cursor: pointer;}
+#rules{display: none;padding:0 3%;}
+/* 设置密码 */
+.tips{ color: #ccc;margin: 0 0 5% 2%;}
+/*layer*/
+.layui-layer-btn0{background: #52bf63!important;border-color: #52bf63!important;}
+.layui-layer-title{background: #52bf63!important;color:#fff!important}
+/*费率，额度*/
+.wode{background: #F5F5F5;}
+.box,.card{margin-top: 5%;}
+.box p,.card p{margin-left: 5%;margin-bottom:2%;font-size: 16px;}
+.item_list{width: 100%;margin-top:5px; }
+.sort{background-color: #eee;text-align: center;padding:2% 0;}
+.item_list>tbody>tr td{text-align: center;padding:2%;background: #fff;}
+/*结算卡*/
+.card ul{ margin: 0.5rem;}
+.card li{padding: 5% 0;border-bottom: 1px solid #eee;width: 50%;float: left;}
+.card li:last-child{border-bottom: none;}

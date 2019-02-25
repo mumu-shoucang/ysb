@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../lib/css/bootstrap-4.0.0.min.css">
+<link rel="stylesheet" type="text/css" href="../../lib/css/userdefined.cz.css">
+<link rel="stylesheet" type="text/css" href="../../lib/js/artDialog/ui-dialog.css">
+<script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../lib/js/bootstrap-4.0.0.min.js"></script>
+<script type="text/javascript" src="../../lib/js/artDialog/ui-dialog.js"></script>
+<script type="text/javascript" src="../../lib/js/vue.min.js"></script>
+<script type="text/javascript" src="../../lib/js/wdate/WdatePicker.js"></script>
+<script type="text/javascript" src="../../lib/common/commonBase.js"></script>
+<script type="text/javascript" src="../../lib/common/component.js"></script>
+
+<script type="text/javascript" src="../../js/smsBalance/smsBalance.js"></script>
+
+<title>短信余量</title>
+</head>
+	<body>
+		<div id="app" class="container-fluid mt-2">
+			<div class="border">
+				<div class="card-header px-4 py-2 bg-light">
+					<div class="row">
+						<div class="col-10 text-info py-1">短信可用余量查询</div>
+					</div>
+				</div>
+				<div class="form-group px-4"></div>
+				<div class="form-group px-4">
+					<div>{{balanceInfo}}</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

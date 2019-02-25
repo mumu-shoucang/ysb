@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../lib/css/bootstrap-4.0.0.min.css">
+<link rel="stylesheet" type="text/css" href="../../lib/css/userdefined.cz.css">
+<link rel="stylesheet" type="text/css" href="../../lib/js/artDialog/ui-dialog.css">
+<script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../lib/js/bootstrap-4.0.0.min.js"></script>
+<script type="text/javascript" src="../../lib/js/artDialog/ui-dialog.js"></script>
+<script type="text/javascript" src="../../lib/js/jqpaginator.min.js"></script>
+<script type="text/javascript" src="../../lib/js/vue.min.js"></script>
+<script type="text/javascript" src="../../lib/js/wdate/WdatePicker.js"></script>
+<script type="text/javascript" src="../../lib/common/commonBase.js"></script>
+<script type="text/javascript" src="../../lib/common/component.js"></script>
+<script type="text/javascript" src="../../lib/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="../../js/merchant/merchantDetail.js"></script>
+
+<title>商户详情</title>
+<style type="text/css">
+	.table tbody tr td{
+            vertical-align: middle;
+     }
+</style>
+</head>
+<body>
+	<div id="merchantDetailApp" class="container-fluid mt-2">
+		<div class="container-fluid px-0 py-2"><div class="form-text text-muted">当前所在位置&nbsp;&gt;&gt;&nbsp;商户详情
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a  class="text-primary" onclick="javascript:history.back(-1);" href="javascript:;">返回</a>
+		</div></div>
+		<div class="border-bottom"></div>
+		
+			<div class="border my-2">
+				<div class="card-header px-4 py-2 bg-light">
+					<div class="row">
+						<div class="col-10 text-info py-1">
+						用户详情
+						</div>
+					</div>
+				</div>
+				<div class="form-inline py-3" >
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="form-group mr-4">
+						<h5><label for=""><small>推荐人标识：</small><code>{{!merchant.refSign ? '--' : merchant.refSign}}</code></label></h5>
+						
+					</div>
+					<div class="form-group mr-4">
+						<h5><label for=""><small>手机号：</small><code>{{!merchant.loginMobile ? '--' : merchant.loginMobile}}</code></label></h5>
+				          
+					</div>
+					<div class="form-group mr-4">
+						<h5><label for=""><small>商户注册手机号：</small><code>{{!merchant.bindMobile ? '--' : merchant.bindMobile}}</code></label></h5>
+				          
+					</div>
+					<div class="form-group mr-4">
+						<h5><label for=""><small>商户编号：</small><code>{{!merchant.merchantCode ? '--' : merchant.merchantCode}}</code></label></h5>
+				          
+					</div>
+					<div class="form-group mr-4">
+						<h5><label for=""><small>子商户编号：</small><code>{{!merchant.yeeCustomerNumber ? '--' : merchant.yeeCustomerNumber}}</code></label></h5>
+				          
+					</div> 
+				 </div>	
+				 <div class="form-inline py-3" >
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="form-group mr-4">
+						<h5><label for=""><small>身份证号：</small><code>{{!merchant.idCard ? '--' : merchant.idCard}}</code></label></h5>
+				          
+					</div>	
+					<div class="form-group mr-4">
+						<h5><label for=""> <small>身份证号开始时间：</small><code>{{merchant.idCardStart | dateFilters}} </code></label></h5>
+				          
+					</div>	
+					<div class="form-group mr-4">
+						<h5><label for=""><small>身份证号结束时间：</small><code>{{merchant.idCardEnd | dateFilters}}</code></label></h5>
+				          
+					</div>			
+					<div class="form-group mr-4">
+						<h5><label for=""><small>注册时间：</small><code>{{!merchant.createDate ? '--' : merchant.createDate}}</code></label></h5>
+				          
+					</div>
+				</div> 
+			</div>
+			
+			 <div class="border my-2">
+				<div class="card-header px-4 py-2 bg-light">
+					<div class="row">
+						<div class="col-10 text-info py-1">
+						开户行
+						</div>
+					</div>
+				</div>
+				<div class="form-inline py-3" >
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="form-group mr-4">
+						<h5><small>银行卡开户名：</small><code class="font-weight-bold">{{!merchant.bankAccountName ? '--' : merchant.bankAccountName}}</code></h5>
+					</div>
+					<div class="form-group mr-4">
+						<h5><label for=""><small>银行卡号：</small><code>{{bankAccountNo(merchant.bankAccountNo)}}</code></label></h5>
+				          
+					</div>
+					<div class="form-group mr-4">
+						<h5><label for=""><small>银行卡开户行：</small><code class="font-weight-bold">{{!merchant.bankName ? '--' : merchant.bankName}}</code></label></h5>
+				          
+					</div>				
+				</div>
+			</div> 
+			
+			 <table class="table table-striped table-bordered table-hover table-sm">
+				<thead class="thead-light">
+					<tr class="text-center">
+						<th style="text-align:center;">序号</th>
+						<th>信用卡手机号</th>
+						<th>信用卡编码</th>
+						<th>信用卡号</th>
+						<th>银行编码</th>
+						<th>银行名称</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr class="text-center"  v-for="(merchantCreditCard,index) in merchantCreditCards">
+						<td>{{index+1}}</td>
+						<td>{{!merchantCreditCard.merchantMobile ? '--' : merchantCreditCard.merchantMobile}}</td>
+						<td>{{!merchantCreditCard.cardCode ? '--' : merchantCreditCard.cardCode}}</td>
+						<td>{{!merchantCreditCard.cardNo ? '--' : merchantCreditCard.cardNo}}</td>
+						<td>{{!merchantCreditCard.bankCode ? '--' : merchantCreditCard.bankCode}}</td>
+						<td>{{!merchantCreditCard.bankName ? '--' : merchantCreditCard.bankName}}</td>
+					</tr>
+					<tr v-if="merchantCreditCards.length<=0" class="text-center">
+						<td colspan="6">暂无数据</td>
+					</tr>
+				</tbody> 
+			</table> 
+	</div>
+</body>
+</html>

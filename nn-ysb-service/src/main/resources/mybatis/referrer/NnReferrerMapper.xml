@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.referrer.mapper.NnReferrerMapper" >
+  <resultMap id="BaseResultMap" type="com.n.ysb.service.referrer.po.NnReferrer" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="REF_SIGN" property="refSign" jdbcType="VARCHAR" />
+    <result column="REF_CODE" property="refCode" jdbcType="VARCHAR" />
+    <result column="REF_LINK" property="refLink" jdbcType="VARCHAR" />
+    <result column="REF_STATUS" property="refStatus" jdbcType="VARCHAR" />
+    <result column="COMMISSION_RATE" property="commissionRate" jdbcType="DECIMAL" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+    <result column="CK_BANK_CARD" property="ckBankCard" jdbcType="VARCHAR"/>
+    <result column="BASIC_COMMISSION" property="basicCommission" jdbcType="DECIMAL"/>
+    <result column="YEE_CUSTOMER_NUMBER" property="yeeCustomerNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, MOBILE, REF_SIGN, REF_CODE, REF_LINK, REF_STATUS, COMMISSION_RATE, CREATE_DATE,ID_CARD,CK_BANK_CARD,BASIC_COMMISSION, YEE_CUSTOMER_NUMBER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.n.ysb.service.referrer.po.NnReferrerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NN_REFERRER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from NN_REFERRER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from NN_REFERRER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.n.ysb.service.referrer.po.NnReferrerExample" >
+    delete from NN_REFERRER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.n.ysb.service.referrer.po.NnReferrer" >
+    insert into NN_REFERRER (NAME, MOBILE, 
+      REF_SIGN, REF_CODE, REF_LINK, 
+      REF_STATUS, COMMISSION_RATE, CREATE_DATE,ID_CARD,CK_BANK_CARD,BASIC_COMMISSION, YEE_CUSTOMER_NUMBER
+      )
+    values (#{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{refSign,jdbcType=VARCHAR}, #{refCode,jdbcType=VARCHAR}, #{refLink,jdbcType=VARCHAR}, 
+      #{refStatus,jdbcType=VARCHAR}, #{commissionRate,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP},
+      #{idCard,jdbcType=VARCHAR},#{ckBankCard,jdbcType=VARCHAR},#{basicCommission,jdbcType=DECIMAL},
+      #{yeeCustomerNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.n.ysb.service.referrer.po.NnReferrer" >
+    insert into NN_REFERRER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="refSign != null" >
+        REF_SIGN,
+      </if>
+      <if test="refCode != null" >
+        REF_CODE,
+      </if>
+      <if test="refLink != null" >
+        REF_LINK,
+      </if>
+      <if test="refStatus != null" >
+        REF_STATUS,
+      </if>
+      <if test="commissionRate != null" >
+        COMMISSION_RATE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="ckBankCard != null" >
+        CK_BANK_CARD,
+      </if>
+      <if test="basicCommission != null" >
+        BASIC_COMMISSION,
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="refSign != null" >
+        #{refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="refCode != null" >
+        #{refCode,jdbcType=VARCHAR},
+      </if>
+      <if test="refLink != null" >
+        #{refLink,jdbcType=VARCHAR},
+      </if>
+      <if test="refStatus != null" >
+        #{refStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionRate != null" >
+        #{commissionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="ckBankCard != null" >
+        #{ckBankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="basicCommission != null" >
+        #{basicCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.n.ysb.service.referrer.po.NnReferrerExample" resultType="java.lang.Integer" >
+    select count(*) from NN_REFERRER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update NN_REFERRER
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refSign != null" >
+        REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refCode != null" >
+        REF_CODE = #{record.refCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refLink != null" >
+        REF_LINK = #{record.refLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refStatus != null" >
+        REF_STATUS = #{record.refStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commissionRate != null" >
+        COMMISSION_RATE = #{record.commissionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.idCard != null" >
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ckBankCard != null" >
+        CK_BANK_CARD = #{record.ckBankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basicCommission != null" >
+        BASIC_COMMISSION = #{record.basicCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update NN_REFERRER
+    set ID = #{record.id,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      REF_CODE = #{record.refCode,jdbcType=VARCHAR},
+      REF_LINK = #{record.refLink,jdbcType=VARCHAR},
+      REF_STATUS = #{record.refStatus,jdbcType=VARCHAR},
+      COMMISSION_RATE = #{record.commissionRate,jdbcType=DECIMAL},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.n.ysb.service.referrer.po.NnReferrer" >
+    update NN_REFERRER
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="refSign != null" >
+        REF_SIGN = #{refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="refCode != null" >
+        REF_CODE = #{refCode,jdbcType=VARCHAR},
+      </if>
+      <if test="refLink != null" >
+        REF_LINK = #{refLink,jdbcType=VARCHAR},
+      </if>
+      <if test="refStatus != null" >
+        REF_STATUS = #{refStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionRate != null" >
+        COMMISSION_RATE = #{commissionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="ckBankCard != null" >
+        CK_BANK_CARD = #{ckBankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="basicCommission != null" >
+        BASIC_COMMISSION = #{basicCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.n.ysb.service.referrer.po.NnReferrer" >
+    update NN_REFERRER
+    set NAME = #{name,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      REF_SIGN = #{refSign,jdbcType=VARCHAR},
+      REF_CODE = #{refCode,jdbcType=VARCHAR},
+      REF_LINK = #{refLink,jdbcType=VARCHAR},
+      REF_STATUS = #{refStatus,jdbcType=VARCHAR},
+      COMMISSION_RATE = #{commissionRate,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getByRefCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from NN_REFERRER
+    where REF_CODE = #{refCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

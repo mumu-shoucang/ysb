@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../../../lib/css/bootstrap-4.0.0.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../lib/css/userdefined.cz.css">
+		<link rel="stylesheet" type="text/css" href="../../../lib/js/artDialog/ui-dialog.css">
+		<link rel="stylesheet" type="text/css" href="../../../lib/zTree/css/zTreeStyle/zTreeStyle.css">
+		<script type="text/javascript" src="../../../lib/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../../lib/js/bootstrap-4.0.0.min.js"></script>
+		<script type="text/javascript" src="../../../lib/js/artDialog/ui-dialog.js"></script>
+		<script type="text/javascript" src="../../../lib/js/vue.min.js"></script>
+		<script type="text/javascript" src="../../../lib/js/wdate/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../../lib/zTree/js/jquery.ztree.core.min.js"></script>
+		<script type="text/javascript" src="../../../lib/zTree/js/jquery.ztree.excheck.min.js"></script>
+		<script type="text/javascript" src="../../../lib/common/commonBase.js"></script>
+		<script type="text/javascript" src="../../../lib/common/component.js"></script>
+		
+		<script type="text/javascript" src="../../../js/system/roleUpdate.js"></script>
+		
+	</head>
+
+	<body>
+		<div id="app" class="container-fluid mt-2" style="overflow:auto;">
+			<div class="border">
+				<!-- <div class="card-header bg-light text-info border-bottom">更新</div> -->
+				<div class="px-4 py-2">
+					<div class="row">
+						<div class="col-10 form-group">
+							<label for="roleName">名称：</label>
+							<input type="text" class="form-control form-control-sm" id="roleName" v-model="role.roleName">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 form-group">
+							<label>菜单：</label>
+							
+							<ul id="resTree" class="ztree"></ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6 text-right">
+							<button class="btn btn-primary btn-sm" style="width:60px;" @click="update" >确 定</button>
+						</div>
+						<div class="col-6 text-left">
+							<button class="btn btn-primary btn-sm" style="width:60px;" @click="cancle">取 消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="logback.xsd">
+
+	<property name="appID" value="nn-ysb-http-web" />
+	
+	<property name="logpath" value="${catalina.home}/logs" />
+	<property name="patt" value="[%d{yyyMMdd HH:mm:ss.SSS}] [${appID}] [%-5level] [%-1thread] %logger{1}.%M %L - %msg%n" />
+	<property name="pattBlank" value="%msg%n" />
+
+	<appender name="std" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${patt}</pattern>
+		</encoder>
+	</appender>
+
+  <!-- 基本日志 -->
+	<appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender" >
+		<encoder>
+			<pattern>${patt}</pattern>
+		</encoder>
+		<!-- <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter> -->
+        
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        	<level>INFO</level>
+        </filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logpath}/${appID}/info-%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		
+	</appender>
+
+
+	<root level="debug">
+		<appender-ref ref="std" />
+		<appender-ref ref="info" />
+	</root>
+
+</configuration>

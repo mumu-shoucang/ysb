@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.order.mapper.IDGeneratorMapper" >
+  
+  <select id="getOrderSeqNext" resultType="java.lang.String">
+    select S_ORDER.nextval from dual
+  </select>
+  
+  <select id="getUserSeqNext" resultType="java.lang.String">
+    select S_USER.nextval from dual
+  </select>
+  
+  <select id="getRoleSeqNext" resultType="java.lang.String">
+    select S_ROLE.nextval from dual
+  </select>
+  
+  <select id="getResSeqNext" resultType="java.lang.String">
+    select S_RES.nextval from dual
+  </select>
+  
+  <select id="getMerSeqNext" resultType="java.lang.String">
+    select S_MER.nextval from dual
+  </select>
+  
+</mapper>

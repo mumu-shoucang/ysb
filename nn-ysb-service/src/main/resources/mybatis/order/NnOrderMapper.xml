@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.order.mapper.NnOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.n.ysb.service.order.po.NnOrder" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MERCHANT_MOBILE" property="merchantMobile" jdbcType="VARCHAR" />
+    <result column="REF_SIGN" property="refSign" jdbcType="VARCHAR" />
+    <result column="ORDER_STATUS" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="DEBIT_CARD_NO" property="debitCardNo" jdbcType="VARCHAR" />
+    <result column="CREDIT_CARD_NO" property="creditCardNo" jdbcType="VARCHAR" />
+    <result column="ORDER_AMT" property="orderAmt" jdbcType="DECIMAL" />
+    <result column="TRADE_FEE" property="tradeFee" jdbcType="DECIMAL" />
+    <result column="T0_WITHDRAW_FEE" property="t0WithdrawFee" jdbcType="DECIMAL" />
+    <result column="YEE_EXTERNAL_LD" property="yeeExternalLd" jdbcType="VARCHAR" />
+    <result column="YEE_PAY_STATUS" property="yeePayStatus" jdbcType="VARCHAR" />
+    <result column="YEE_PAY_DATE" property="yeePayDate" jdbcType="TIMESTAMP" />
+    <result column="YEE_TRADE_FEE" property="yeeTradeFee" jdbcType="DECIMAL" />
+    <result column="YEE_WITHDRAW_STATUS" property="yeeWithdrawStatus" jdbcType="VARCHAR" />
+    <result column="YEE_WITHDRAW_HANDLE_DATE" property="yeeWithdrawHandleDate" jdbcType="TIMESTAMP" />
+    <result column="YEE_RECEIVER" property="yeeReceiver" jdbcType="VARCHAR" />
+    <result column="YEE_RECEIVER_BANKCARD_NO" property="yeeReceiverBankcardNo" jdbcType="VARCHAR" />
+    <result column="YEE_WITHDRAW_AMT" property="yeeWithdrawAmt" jdbcType="DECIMAL" />
+    <result column="YEE_WITHDRAW_ACTUAL_AMT" property="yeeWithdrawActualAmt" jdbcType="DECIMAL" />
+    <result column="YEE_T0_WITHDRAW_FEE" property="yeeT0WithdrawFee" jdbcType="DECIMAL" />
+    <result column="YEE_T0_WITHDRAW_EXFEE" property="yeeT0WithdrawExfee" jdbcType="DECIMAL" />
+    <result column="MCC" property="mcc" jdbcType="VARCHAR" />
+    <result column="T0_WITHDRAW_EXFEE" property="t0WithdrawExfee" jdbcType="DECIMAL" />
+    <result column="COMMISSTION" property="commisstion" jdbcType="DECIMAL" />
+    <result column="TRADE_COMMISSTION" property="tradeCommisstion" jdbcType="DECIMAL" />
+    <result column="WITHDRAW_COMMISSTION" property="withdrawCommisstion" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ORDER_NO, CREATE_DATE, MERCHANT_MOBILE, REF_SIGN, ORDER_STATUS, DEBIT_CARD_NO, 
+    CREDIT_CARD_NO, ORDER_AMT, TRADE_FEE, T0_WITHDRAW_FEE, YEE_EXTERNAL_LD, YEE_PAY_STATUS, 
+    YEE_PAY_DATE, YEE_TRADE_FEE, YEE_WITHDRAW_STATUS, YEE_WITHDRAW_HANDLE_DATE, YEE_RECEIVER, 
+    YEE_RECEIVER_BANKCARD_NO, YEE_WITHDRAW_AMT, YEE_WITHDRAW_ACTUAL_AMT, YEE_T0_WITHDRAW_FEE, 
+    YEE_T0_WITHDRAW_EXFEE, MCC, T0_WITHDRAW_EXFEE, COMMISSTION, TRADE_COMMISSTION, WITHDRAW_COMMISSTION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.n.ysb.service.order.po.NnOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NN_ORDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from NN_ORDER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from NN_ORDER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.n.ysb.service.order.po.NnOrderExample" >
+    delete from NN_ORDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.n.ysb.service.order.po.NnOrder" >
+    insert into NN_ORDER (ID, ORDER_NO, CREATE_DATE, 
+      MERCHANT_MOBILE, REF_SIGN, ORDER_STATUS, 
+      DEBIT_CARD_NO, CREDIT_CARD_NO, ORDER_AMT, 
+      TRADE_FEE, T0_WITHDRAW_FEE, YEE_EXTERNAL_LD, 
+      YEE_PAY_STATUS, YEE_PAY_DATE, YEE_TRADE_FEE, 
+      YEE_WITHDRAW_STATUS, YEE_WITHDRAW_HANDLE_DATE, 
+      YEE_RECEIVER, YEE_RECEIVER_BANKCARD_NO, YEE_WITHDRAW_AMT, 
+      YEE_WITHDRAW_ACTUAL_AMT, YEE_T0_WITHDRAW_FEE, 
+      YEE_T0_WITHDRAW_EXFEE, MCC, T0_WITHDRAW_EXFEE, 
+      COMMISSTION, TRADE_COMMISSTION, WITHDRAW_COMMISSTION
+      )
+    values (#{id,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{merchantMobile,jdbcType=VARCHAR}, #{refSign,jdbcType=VARCHAR}, #{orderStatus,jdbcType=VARCHAR}, 
+      #{debitCardNo,jdbcType=VARCHAR}, #{creditCardNo,jdbcType=VARCHAR}, #{orderAmt,jdbcType=DECIMAL}, 
+      #{tradeFee,jdbcType=DECIMAL}, #{t0WithdrawFee,jdbcType=DECIMAL}, #{yeeExternalLd,jdbcType=VARCHAR}, 
+      #{yeePayStatus,jdbcType=VARCHAR}, #{yeePayDate,jdbcType=TIMESTAMP}, #{yeeTradeFee,jdbcType=DECIMAL}, 
+      #{yeeWithdrawStatus,jdbcType=VARCHAR}, #{yeeWithdrawHandleDate,jdbcType=TIMESTAMP}, 
+      #{yeeReceiver,jdbcType=VARCHAR}, #{yeeReceiverBankcardNo,jdbcType=VARCHAR}, #{yeeWithdrawAmt,jdbcType=DECIMAL}, 
+      #{yeeWithdrawActualAmt,jdbcType=DECIMAL}, #{yeeT0WithdrawFee,jdbcType=DECIMAL}, 
+      #{yeeT0WithdrawExfee,jdbcType=DECIMAL}, #{mcc,jdbcType=VARCHAR}, #{t0WithdrawExfee,jdbcType=DECIMAL}, 
+      #{commisstion,jdbcType=DECIMAL}, #{tradeCommisstion,jdbcType=DECIMAL}, #{withdrawCommisstion,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.n.ysb.service.order.po.NnOrder" >
+    insert into NN_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="merchantMobile != null" >
+        MERCHANT_MOBILE,
+      </if>
+      <if test="refSign != null" >
+        REF_SIGN,
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS,
+      </if>
+      <if test="debitCardNo != null" >
+        DEBIT_CARD_NO,
+      </if>
+      <if test="creditCardNo != null" >
+        CREDIT_CARD_NO,
+      </if>
+      <if test="orderAmt != null" >
+        ORDER_AMT,
+      </if>
+      <if test="tradeFee != null" >
+        TRADE_FEE,
+      </if>
+      <if test="t0WithdrawFee != null" >
+        T0_WITHDRAW_FEE,
+      </if>
+      <if test="yeeExternalLd != null" >
+        YEE_EXTERNAL_LD,
+      </if>
+      <if test="yeePayStatus != null" >
+        YEE_PAY_STATUS,
+      </if>
+      <if test="yeePayDate != null" >
+        YEE_PAY_DATE,
+      </if>
+      <if test="yeeTradeFee != null" >
+        YEE_TRADE_FEE,
+      </if>
+      <if test="yeeWithdrawStatus != null" >
+        YEE_WITHDRAW_STATUS,
+      </if>
+      <if test="yeeWithdrawHandleDate != null" >
+        YEE_WITHDRAW_HANDLE_DATE,
+      </if>
+      <if test="yeeReceiver != null" >
+        YEE_RECEIVER,
+      </if>
+      <if test="yeeReceiverBankcardNo != null" >
+        YEE_RECEIVER_BANKCARD_NO,
+      </if>
+      <if test="yeeWithdrawAmt != null" >
+        YEE_WITHDRAW_AMT,
+      </if>
+      <if test="yeeWithdrawActualAmt != null" >
+        YEE_WITHDRAW_ACTUAL_AMT,
+      </if>
+      <if test="yeeT0WithdrawFee != null" >
+        YEE_T0_WITHDRAW_FEE,
+      </if>
+      <if test="yeeT0WithdrawExfee != null" >
+        YEE_T0_WITHDRAW_EXFEE,
+      </if>
+      <if test="mcc != null" >
+        MCC,
+      </if>
+      <if test="t0WithdrawExfee != null" >
+        T0_WITHDRAW_EXFEE,
+      </if>
+      <if test="commisstion != null" >
+        COMMISSTION,
+      </if>
+      <if test="tradeCommisstion != null" >
+        TRADE_COMMISSTION,
+      </if>
+      <if test="withdrawCommisstion != null" >
+        WITHDRAW_COMMISSTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="merchantMobile != null" >
+        #{merchantMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="refSign != null" >
+        #{refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="debitCardNo != null" >
+        #{debitCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCardNo != null" >
+        #{creditCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmt != null" >
+        #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeFee != null" >
+        #{tradeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0WithdrawFee != null" >
+        #{t0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeExternalLd != null" >
+        #{yeeExternalLd,jdbcType=VARCHAR},
+      </if>
+      <if test="yeePayStatus != null" >
+        #{yeePayStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="yeePayDate != null" >
+        #{yeePayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeTradeFee != null" >
+        #{yeeTradeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeWithdrawStatus != null" >
+        #{yeeWithdrawStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeWithdrawHandleDate != null" >
+        #{yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeReceiver != null" >
+        #{yeeReceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeReceiverBankcardNo != null" >
+        #{yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeWithdrawAmt != null" >
+        #{yeeWithdrawAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeWithdrawActualAmt != null" >
+        #{yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeT0WithdrawFee != null" >
+        #{yeeT0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeT0WithdrawExfee != null" >
+        #{yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="mcc != null" >
+        #{mcc,jdbcType=VARCHAR},
+      </if>
+      <if test="t0WithdrawExfee != null" >
+        #{t0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="commisstion != null" >
+        #{commisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeCommisstion != null" >
+        #{tradeCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawCommisstion != null" >
+        #{withdrawCommisstion,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.n.ysb.service.order.po.NnOrderExample" resultType="java.lang.Integer" >
+    select count(*) from NN_ORDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update NN_ORDER
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null" >
+        ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.merchantMobile != null" >
+        MERCHANT_MOBILE = #{record.merchantMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refSign != null" >
+        REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStatus != null" >
+        ORDER_STATUS = #{record.orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debitCardNo != null" >
+        DEBIT_CARD_NO = #{record.debitCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditCardNo != null" >
+        CREDIT_CARD_NO = #{record.creditCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderAmt != null" >
+        ORDER_AMT = #{record.orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradeFee != null" >
+        TRADE_FEE = #{record.tradeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.t0WithdrawFee != null" >
+        T0_WITHDRAW_FEE = #{record.t0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeExternalLd != null" >
+        YEE_EXTERNAL_LD = #{record.yeeExternalLd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeePayStatus != null" >
+        YEE_PAY_STATUS = #{record.yeePayStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeePayDate != null" >
+        YEE_PAY_DATE = #{record.yeePayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.yeeTradeFee != null" >
+        YEE_TRADE_FEE = #{record.yeeTradeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeWithdrawStatus != null" >
+        YEE_WITHDRAW_STATUS = #{record.yeeWithdrawStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeWithdrawHandleDate != null" >
+        YEE_WITHDRAW_HANDLE_DATE = #{record.yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.yeeReceiver != null" >
+        YEE_RECEIVER = #{record.yeeReceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeReceiverBankcardNo != null" >
+        YEE_RECEIVER_BANKCARD_NO = #{record.yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeWithdrawAmt != null" >
+        YEE_WITHDRAW_AMT = #{record.yeeWithdrawAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeWithdrawActualAmt != null" >
+        YEE_WITHDRAW_ACTUAL_AMT = #{record.yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeT0WithdrawFee != null" >
+        YEE_T0_WITHDRAW_FEE = #{record.yeeT0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeT0WithdrawExfee != null" >
+        YEE_T0_WITHDRAW_EXFEE = #{record.yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mcc != null" >
+        MCC = #{record.mcc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.t0WithdrawExfee != null" >
+        T0_WITHDRAW_EXFEE = #{record.t0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.commisstion != null" >
+        COMMISSTION = #{record.commisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradeCommisstion != null" >
+        TRADE_COMMISSTION = #{record.tradeCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.withdrawCommisstion != null" >
+        WITHDRAW_COMMISSTION = #{record.withdrawCommisstion,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update NN_ORDER
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MERCHANT_MOBILE = #{record.merchantMobile,jdbcType=VARCHAR},
+      REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      ORDER_STATUS = #{record.orderStatus,jdbcType=VARCHAR},
+      DEBIT_CARD_NO = #{record.debitCardNo,jdbcType=VARCHAR},
+      CREDIT_CARD_NO = #{record.creditCardNo,jdbcType=VARCHAR},
+      ORDER_AMT = #{record.orderAmt,jdbcType=DECIMAL},
+      TRADE_FEE = #{record.tradeFee,jdbcType=DECIMAL},
+      T0_WITHDRAW_FEE = #{record.t0WithdrawFee,jdbcType=DECIMAL},
+      YEE_EXTERNAL_LD = #{record.yeeExternalLd,jdbcType=VARCHAR},
+      YEE_PAY_STATUS = #{record.yeePayStatus,jdbcType=VARCHAR},
+      YEE_PAY_DATE = #{record.yeePayDate,jdbcType=TIMESTAMP},
+      YEE_TRADE_FEE = #{record.yeeTradeFee,jdbcType=DECIMAL},
+      YEE_WITHDRAW_STATUS = #{record.yeeWithdrawStatus,jdbcType=VARCHAR},
+      YEE_WITHDRAW_HANDLE_DATE = #{record.yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      YEE_RECEIVER = #{record.yeeReceiver,jdbcType=VARCHAR},
+      YEE_RECEIVER_BANKCARD_NO = #{record.yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      YEE_WITHDRAW_AMT = #{record.yeeWithdrawAmt,jdbcType=DECIMAL},
+      YEE_WITHDRAW_ACTUAL_AMT = #{record.yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      YEE_T0_WITHDRAW_FEE = #{record.yeeT0WithdrawFee,jdbcType=DECIMAL},
+      YEE_T0_WITHDRAW_EXFEE = #{record.yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      MCC = #{record.mcc,jdbcType=VARCHAR},
+      T0_WITHDRAW_EXFEE = #{record.t0WithdrawExfee,jdbcType=DECIMAL},
+      COMMISSTION = #{record.commisstion,jdbcType=DECIMAL},
+      TRADE_COMMISSTION = #{record.tradeCommisstion,jdbcType=DECIMAL},
+      WITHDRAW_COMMISSTION = #{record.withdrawCommisstion,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.n.ysb.service.order.po.NnOrder" >
+    update NN_ORDER
+    <set >
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="merchantMobile != null" >
+        MERCHANT_MOBILE = #{merchantMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="refSign != null" >
+        REF_SIGN = #{refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="debitCardNo != null" >
+        DEBIT_CARD_NO = #{debitCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCardNo != null" >
+        CREDIT_CARD_NO = #{creditCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmt != null" >
+        ORDER_AMT = #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeFee != null" >
+        TRADE_FEE = #{tradeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0WithdrawFee != null" >
+        T0_WITHDRAW_FEE = #{t0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeExternalLd != null" >
+        YEE_EXTERNAL_LD = #{yeeExternalLd,jdbcType=VARCHAR},
+      </if>
+      <if test="yeePayStatus != null" >
+        YEE_PAY_STATUS = #{yeePayStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="yeePayDate != null" >
+        YEE_PAY_DATE = #{yeePayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeTradeFee != null" >
+        YEE_TRADE_FEE = #{yeeTradeFee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeWithdrawStatus != null" >
+        YEE_WITHDRAW_STATUS = #{yeeWithdrawStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeWithdrawHandleDate != null" >
+        YEE_WITHDRAW_HANDLE_DATE = #{yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeReceiver != null" >
+        YEE_RECEIVER = #{yeeReceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeReceiverBankcardNo != null" >
+        YEE_RECEIVER_BANKCARD_NO = #{yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeWithdrawAmt != null" >
+        YEE_WITHDRAW_AMT = #{yeeWithdrawAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeWithdrawActualAmt != null" >
+        YEE_WITHDRAW_ACTUAL_AMT = #{yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeT0WithdrawFee != null" >
+        YEE_T0_WITHDRAW_FEE = #{yeeT0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeT0WithdrawExfee != null" >
+        YEE_T0_WITHDRAW_EXFEE = #{yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="mcc != null" >
+        MCC = #{mcc,jdbcType=VARCHAR},
+      </if>
+      <if test="t0WithdrawExfee != null" >
+        T0_WITHDRAW_EXFEE = #{t0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="commisstion != null" >
+        COMMISSTION = #{commisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeCommisstion != null" >
+        TRADE_COMMISSTION = #{tradeCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawCommisstion != null" >
+        WITHDRAW_COMMISSTION = #{withdrawCommisstion,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.n.ysb.service.order.po.NnOrder" >
+    update NN_ORDER
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MERCHANT_MOBILE = #{merchantMobile,jdbcType=VARCHAR},
+      REF_SIGN = #{refSign,jdbcType=VARCHAR},
+      ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      DEBIT_CARD_NO = #{debitCardNo,jdbcType=VARCHAR},
+      CREDIT_CARD_NO = #{creditCardNo,jdbcType=VARCHAR},
+      ORDER_AMT = #{orderAmt,jdbcType=DECIMAL},
+      TRADE_FEE = #{tradeFee,jdbcType=DECIMAL},
+      T0_WITHDRAW_FEE = #{t0WithdrawFee,jdbcType=DECIMAL},
+      YEE_EXTERNAL_LD = #{yeeExternalLd,jdbcType=VARCHAR},
+      YEE_PAY_STATUS = #{yeePayStatus,jdbcType=VARCHAR},
+      YEE_PAY_DATE = #{yeePayDate,jdbcType=TIMESTAMP},
+      YEE_TRADE_FEE = #{yeeTradeFee,jdbcType=DECIMAL},
+      YEE_WITHDRAW_STATUS = #{yeeWithdrawStatus,jdbcType=VARCHAR},
+      YEE_WITHDRAW_HANDLE_DATE = #{yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      YEE_RECEIVER = #{yeeReceiver,jdbcType=VARCHAR},
+      YEE_RECEIVER_BANKCARD_NO = #{yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      YEE_WITHDRAW_AMT = #{yeeWithdrawAmt,jdbcType=DECIMAL},
+      YEE_WITHDRAW_ACTUAL_AMT = #{yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      YEE_T0_WITHDRAW_FEE = #{yeeT0WithdrawFee,jdbcType=DECIMAL},
+      YEE_T0_WITHDRAW_EXFEE = #{yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      MCC = #{mcc,jdbcType=VARCHAR},
+      T0_WITHDRAW_EXFEE = #{t0WithdrawExfee,jdbcType=DECIMAL},
+      COMMISSTION = #{commisstion,jdbcType=DECIMAL},
+      TRADE_COMMISSTION = #{tradeCommisstion,jdbcType=DECIMAL},
+      WITHDRAW_COMMISSTION = #{withdrawCommisstion,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

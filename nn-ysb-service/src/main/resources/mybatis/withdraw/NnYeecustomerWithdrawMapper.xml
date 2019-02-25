@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.withdraw.mapper.NnYeecustomerWithdrawMapper" >
+  <resultMap id="BaseResultMap" type="com.n.ysb.service.withdraw.po.NnYeecustomerWithdraw" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="YEE_CUSTOMER_NUMBER" property="yeeCustomerNumber" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="WITHDRAW_AMT" property="withdrawAmt" jdbcType="DECIMAL" />
+    <result column="WITHDRAW_STATUS" property="withdrawStatus" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="YEE_WITHDRAW_HANDLE_DATE" property="yeeWithdrawHandleDate" jdbcType="TIMESTAMP" />
+    <result column="YEE_RECEIVER" property="yeeReceiver" jdbcType="VARCHAR" />
+    <result column="YEE_RECEIVER_BANKCARD_NO" property="yeeReceiverBankcardNo" jdbcType="VARCHAR" />
+    <result column="YEE_WITHDRAW_AMT" property="yeeWithdrawAmt" jdbcType="DECIMAL" />
+    <result column="YEE_WITHDRAW_ACTUAL_AMT" property="yeeWithdrawActualAmt" jdbcType="DECIMAL" />
+    <result column="YEE_T0_WITHDRAW_FEE" property="yeeT0WithdrawFee" jdbcType="DECIMAL" />
+    <result column="YEE_T0_WITHDRAW_EXFEE" property="yeeT0WithdrawExfee" jdbcType="DECIMAL" />
+    <result column="YEE_EXTERNAL_LD" property="yeeExternalLd" jdbcType="VARCHAR" />
+    <result column="YEE_WITHDRAW_STATUS" property="yeeWithdrawStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, YEE_CUSTOMER_NUMBER, ORDER_NO, WITHDRAW_AMT, WITHDRAW_STATUS, CREATE_DATE, YEE_WITHDRAW_HANDLE_DATE, 
+    YEE_RECEIVER, YEE_RECEIVER_BANKCARD_NO, YEE_WITHDRAW_AMT, YEE_WITHDRAW_ACTUAL_AMT, 
+    YEE_T0_WITHDRAW_FEE, YEE_T0_WITHDRAW_EXFEE, YEE_EXTERNAL_LD, YEE_WITHDRAW_STATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.n.ysb.service.withdraw.po.NnYeecustomerWithdrawExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NN_YEECUSTOMER_WITHDRAW
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.n.ysb.service.withdraw.po.NnYeecustomerWithdrawExample" >
+    delete from NN_YEECUSTOMER_WITHDRAW
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.n.ysb.service.withdraw.po.NnYeecustomerWithdraw" >
+    insert into NN_YEECUSTOMER_WITHDRAW (ID, YEE_CUSTOMER_NUMBER, ORDER_NO, 
+      WITHDRAW_AMT, WITHDRAW_STATUS, CREATE_DATE, 
+      YEE_WITHDRAW_HANDLE_DATE, YEE_RECEIVER, YEE_RECEIVER_BANKCARD_NO, 
+      YEE_WITHDRAW_AMT, YEE_WITHDRAW_ACTUAL_AMT, YEE_T0_WITHDRAW_FEE, 
+      YEE_T0_WITHDRAW_EXFEE, YEE_EXTERNAL_LD, YEE_WITHDRAW_STATUS
+      )
+    values (#{id,jdbcType=VARCHAR}, #{yeeCustomerNumber,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{withdrawAmt,jdbcType=DECIMAL}, #{withdrawStatus,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{yeeWithdrawHandleDate,jdbcType=TIMESTAMP}, #{yeeReceiver,jdbcType=VARCHAR}, #{yeeReceiverBankcardNo,jdbcType=VARCHAR}, 
+      #{yeeWithdrawAmt,jdbcType=DECIMAL}, #{yeeWithdrawActualAmt,jdbcType=DECIMAL}, #{yeeT0WithdrawFee,jdbcType=DECIMAL}, 
+      #{yeeT0WithdrawExfee,jdbcType=DECIMAL}, #{yeeExternalLd,jdbcType=VARCHAR}, #{yeeWithdrawStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.n.ysb.service.withdraw.po.NnYeecustomerWithdraw" >
+    insert into NN_YEECUSTOMER_WITHDRAW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="withdrawAmt != null" >
+        WITHDRAW_AMT,
+      </if>
+      <if test="withdrawStatus != null" >
+        WITHDRAW_STATUS,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="yeeWithdrawHandleDate != null" >
+        YEE_WITHDRAW_HANDLE_DATE,
+      </if>
+      <if test="yeeReceiver != null" >
+        YEE_RECEIVER,
+      </if>
+      <if test="yeeReceiverBankcardNo != null" >
+        YEE_RECEIVER_BANKCARD_NO,
+      </if>
+      <if test="yeeWithdrawAmt != null" >
+        YEE_WITHDRAW_AMT,
+      </if>
+      <if test="yeeWithdrawActualAmt != null" >
+        YEE_WITHDRAW_ACTUAL_AMT,
+      </if>
+      <if test="yeeT0WithdrawFee != null" >
+        YEE_T0_WITHDRAW_FEE,
+      </if>
+      <if test="yeeT0WithdrawExfee != null" >
+        YEE_T0_WITHDRAW_EXFEE,
+      </if>
+      <if test="yeeExternalLd != null" >
+        YEE_EXTERNAL_LD,
+      </if>
+      <if test="yeeWithdrawStatus != null" >
+        YEE_WITHDRAW_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawAmt != null" >
+        #{withdrawAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawStatus != null" >
+        #{withdrawStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeWithdrawHandleDate != null" >
+        #{yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeReceiver != null" >
+        #{yeeReceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeReceiverBankcardNo != null" >
+        #{yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeWithdrawAmt != null" >
+        #{yeeWithdrawAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeWithdrawActualAmt != null" >
+        #{yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeT0WithdrawFee != null" >
+        #{yeeT0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeT0WithdrawExfee != null" >
+        #{yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeExternalLd != null" >
+        #{yeeExternalLd,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeWithdrawStatus != null" >
+        #{yeeWithdrawStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.n.ysb.service.withdraw.po.NnYeecustomerWithdrawExample" resultType="java.lang.Integer" >
+    select count(*) from NN_YEECUSTOMER_WITHDRAW
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update NN_YEECUSTOMER_WITHDRAW
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null" >
+        ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.withdrawAmt != null" >
+        WITHDRAW_AMT = #{record.withdrawAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.withdrawStatus != null" >
+        WITHDRAW_STATUS = #{record.withdrawStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.yeeWithdrawHandleDate != null" >
+        YEE_WITHDRAW_HANDLE_DATE = #{record.yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.yeeReceiver != null" >
+        YEE_RECEIVER = #{record.yeeReceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeReceiverBankcardNo != null" >
+        YEE_RECEIVER_BANKCARD_NO = #{record.yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeWithdrawAmt != null" >
+        YEE_WITHDRAW_AMT = #{record.yeeWithdrawAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeWithdrawActualAmt != null" >
+        YEE_WITHDRAW_ACTUAL_AMT = #{record.yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeT0WithdrawFee != null" >
+        YEE_T0_WITHDRAW_FEE = #{record.yeeT0WithdrawFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeT0WithdrawExfee != null" >
+        YEE_T0_WITHDRAW_EXFEE = #{record.yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeExternalLd != null" >
+        YEE_EXTERNAL_LD = #{record.yeeExternalLd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeWithdrawStatus != null" >
+        YEE_WITHDRAW_STATUS = #{record.yeeWithdrawStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update NN_YEECUSTOMER_WITHDRAW
+    set ID = #{record.id,jdbcType=VARCHAR},
+      YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      WITHDRAW_AMT = #{record.withdrawAmt,jdbcType=DECIMAL},
+      WITHDRAW_STATUS = #{record.withdrawStatus,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      YEE_WITHDRAW_HANDLE_DATE = #{record.yeeWithdrawHandleDate,jdbcType=TIMESTAMP},
+      YEE_RECEIVER = #{record.yeeReceiver,jdbcType=VARCHAR},
+      YEE_RECEIVER_BANKCARD_NO = #{record.yeeReceiverBankcardNo,jdbcType=VARCHAR},
+      YEE_WITHDRAW_AMT = #{record.yeeWithdrawAmt,jdbcType=DECIMAL},
+      YEE_WITHDRAW_ACTUAL_AMT = #{record.yeeWithdrawActualAmt,jdbcType=DECIMAL},
+      YEE_T0_WITHDRAW_FEE = #{record.yeeT0WithdrawFee,jdbcType=DECIMAL},
+      YEE_T0_WITHDRAW_EXFEE = #{record.yeeT0WithdrawExfee,jdbcType=DECIMAL},
+      YEE_EXTERNAL_LD = #{record.yeeExternalLd,jdbcType=VARCHAR},
+      YEE_WITHDRAW_STATUS = #{record.yeeWithdrawStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.system.mapper.NnResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.n.ysb.service.system.po.NnResource" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="RESOURCE_CODE" property="resourceCode" jdbcType="VARCHAR" />
+    <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR" />
+    <result column="RESOURCE_URL" property="resourceUrl" jdbcType="VARCHAR" />
+    <result column="RESOURCE_STATUS" property="resourceStatus" jdbcType="VARCHAR" />
+    <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, RESOURCE_CODE, RESOURCE_NAME, RESOURCE_URL, RESOURCE_STATUS, PARENT_CODE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.n.ysb.service.system.po.NnResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NN_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from NN_RESOURCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from NN_RESOURCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.n.ysb.service.system.po.NnResourceExample" >
+    delete from NN_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.n.ysb.service.system.po.NnResource" >
+    insert into NN_RESOURCE (ID, RESOURCE_CODE, RESOURCE_NAME, 
+      RESOURCE_URL, RESOURCE_STATUS, PARENT_CODE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{resourceCode,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR}, 
+      #{resourceUrl,jdbcType=VARCHAR}, #{resourceStatus,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.n.ysb.service.system.po.NnResource" >
+    insert into NN_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="resourceCode != null" >
+        RESOURCE_CODE,
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME,
+      </if>
+      <if test="resourceUrl != null" >
+        RESOURCE_URL,
+      </if>
+      <if test="resourceStatus != null" >
+        RESOURCE_STATUS,
+      </if>
+      <if test="parentCode != null" >
+        PARENT_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCode != null" >
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceStatus != null" >
+        #{resourceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.n.ysb.service.system.po.NnResourceExample" resultType="java.lang.Integer" >
+    select count(*) from NN_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update NN_RESOURCE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceCode != null" >
+        RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceName != null" >
+        RESOURCE_NAME = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceUrl != null" >
+        RESOURCE_URL = #{record.resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceStatus != null" >
+        RESOURCE_STATUS = #{record.resourceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentCode != null" >
+        PARENT_CODE = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update NN_RESOURCE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+      RESOURCE_NAME = #{record.resourceName,jdbcType=VARCHAR},
+      RESOURCE_URL = #{record.resourceUrl,jdbcType=VARCHAR},
+      RESOURCE_STATUS = #{record.resourceStatus,jdbcType=VARCHAR},
+      PARENT_CODE = #{record.parentCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.n.ysb.service.system.po.NnResource" >
+    update NN_RESOURCE
+    <set >
+      <if test="resourceCode != null" >
+        RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceStatus != null" >
+        RESOURCE_STATUS = #{resourceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.n.ysb.service.system.po.NnResource" >
+    update NN_RESOURCE
+    set RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+      RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR},
+      RESOURCE_STATUS = #{resourceStatus,jdbcType=VARCHAR},
+      PARENT_CODE = #{parentCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getMenuByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select distinct res.RESOURCE_CODE, res.RESOURCE_NAME, res.RESOURCE_URL, res.PARENT_CODE
+	from NN_USER u, NN_USER_ROLE ur, NN_ROLE r, NN_ROLE_RESOURCE rr, NN_RESOURCE res
+	where u.user_code = ur.USER_CODE and ur.ROLE_CODE = r.ROLE_CODE and r.ROLE_CODE = rr.ROLE_CODE and rr.RESOURCE_CODE = res.RESOURCE_CODE
+	and r.ROLE_STATUS = '1'
+	and res.RESOURCE_STATUS = '1'
+	and u.LOGIN_NAME = #{loginName, jdbcType=VARCHAR}
+	order by res.RESOURCE_CODE
+  </select>
+  
+  <update id="enableModule" parameterType="java.lang.String" >
+    update NN_RESOURCE
+    set  RESOURCE_STATUS = '1'
+    where RESOURCE_CODE = #{resCode,jdbcType=VARCHAR} or PARENT_CODE = #{resCode,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="disableModule" parameterType="java.lang.String" >
+    update NN_RESOURCE
+    set  RESOURCE_STATUS = '0'
+    where RESOURCE_CODE = #{resCode,jdbcType=VARCHAR} or PARENT_CODE = #{resCode,jdbcType=VARCHAR}
+  </update>
+    
+</mapper>

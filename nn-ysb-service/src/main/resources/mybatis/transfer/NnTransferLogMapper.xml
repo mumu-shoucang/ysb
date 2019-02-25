@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.transfer.mapper.NnTransferLogMapper" >
+  <resultMap id="BaseResultMap" type="com.n.ysb.service.transfer.po.NnTransferLog" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="OP_DATE" property="opDate" jdbcType="TIMESTAMP" />
+    <result column="OP_USER" property="opUser" jdbcType="VARCHAR" />
+    <result column="TRANSFER_DATE" property="transferDate" jdbcType="TIMESTAMP" />
+    <result column="REF_SIGN" property="refSign" jdbcType="VARCHAR" />
+    <result column="YEE_CUSTOMER_NUMBER" property="yeeCustomerNumber" jdbcType="VARCHAR" />
+    <result column="TRANSFER_AMT" property="transferAmt" jdbcType="DECIMAL" />
+    <result column="TRANSFER_STATUS" property="transferStatus" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, OP_DATE, OP_USER, TRANSFER_DATE, REF_SIGN, YEE_CUSTOMER_NUMBER, TRANSFER_AMT, 
+    TRANSFER_STATUS, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.n.ysb.service.transfer.po.NnTransferLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NN_TRANSFER_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.n.ysb.service.transfer.po.NnTransferLogExample" >
+    delete from NN_TRANSFER_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.n.ysb.service.transfer.po.NnTransferLog" >
+    insert into NN_TRANSFER_LOG (ID, OP_DATE, OP_USER, 
+      TRANSFER_DATE, REF_SIGN, YEE_CUSTOMER_NUMBER, 
+      TRANSFER_AMT, TRANSFER_STATUS, REMARK
+      )
+    values (#{id,jdbcType=VARCHAR}, #{opDate,jdbcType=TIMESTAMP}, #{opUser,jdbcType=VARCHAR}, 
+      #{transferDate,jdbcType=TIMESTAMP}, #{refSign,jdbcType=VARCHAR}, #{yeeCustomerNumber,jdbcType=VARCHAR}, 
+      #{transferAmt,jdbcType=DECIMAL}, #{transferStatus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.n.ysb.service.transfer.po.NnTransferLog" >
+    insert into NN_TRANSFER_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="opDate != null" >
+        OP_DATE,
+      </if>
+      <if test="opUser != null" >
+        OP_USER,
+      </if>
+      <if test="transferDate != null" >
+        TRANSFER_DATE,
+      </if>
+      <if test="refSign != null" >
+        REF_SIGN,
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER,
+      </if>
+      <if test="transferAmt != null" >
+        TRANSFER_AMT,
+      </if>
+      <if test="transferStatus != null" >
+        TRANSFER_STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="opDate != null" >
+        #{opDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opUser != null" >
+        #{opUser,jdbcType=VARCHAR},
+      </if>
+      <if test="transferDate != null" >
+        #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refSign != null" >
+        #{refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAmt != null" >
+        #{transferAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="transferStatus != null" >
+        #{transferStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.n.ysb.service.transfer.po.NnTransferLogExample" resultType="java.lang.Integer" >
+    select count(*) from NN_TRANSFER_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update NN_TRANSFER_LOG
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opDate != null" >
+        OP_DATE = #{record.opDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.opUser != null" >
+        OP_USER = #{record.opUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferDate != null" >
+        TRANSFER_DATE = #{record.transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.refSign != null" >
+        REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferAmt != null" >
+        TRANSFER_AMT = #{record.transferAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.transferStatus != null" >
+        TRANSFER_STATUS = #{record.transferStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update NN_TRANSFER_LOG
+    set ID = #{record.id,jdbcType=VARCHAR},
+      OP_DATE = #{record.opDate,jdbcType=TIMESTAMP},
+      OP_USER = #{record.opUser,jdbcType=VARCHAR},
+      TRANSFER_DATE = #{record.transferDate,jdbcType=TIMESTAMP},
+      REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      TRANSFER_AMT = #{record.transferAmt,jdbcType=DECIMAL},
+      TRANSFER_STATUS = #{record.transferStatus,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

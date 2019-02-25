@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../lib/css/bootstrap-4.0.0.min.css">
+<link rel="stylesheet" type="text/css" href="../../lib/css/userdefined.cz.css">
+<link rel="stylesheet" type="text/css" href="../../lib/js/artDialog/ui-dialog.css">
+<script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../lib/js/bootstrap-4.0.0.min.js"></script>
+<script type="text/javascript" src="../../lib/js/artDialog/ui-dialog.js"></script>
+<script type="text/javascript" src="../../lib/js/vue.min.js"></script>
+<script type="text/javascript" src="../../lib/js/wdate/WdatePicker.js"></script>
+<script type="text/javascript" src="../../lib/common/commonBase.js"></script>
+<script type="text/javascript" src="../../lib/common/component.js"></script>
+<script type="text/javascript" src="../../js/referrer/referrerAdd.js"></script>
+
+<title>添加推荐人</title>
+</head>
+<style type="text/css">
+			.dialog_content {
+				overflow-x: hidden;
+				overflow-y: auto;
+				padding: 15px;
+			}
+		</style>
+<body>
+		<div id="addReferrerApp" class="container-fluid mt-2" style="max-height:450px;overflow-y:scroll">
+			<div class="border">
+				
+				<form class="form-horizontal" role="form">
+					<input type="hidden" v-model="rt0WithdrawFee">
+				    <div class="form-group">
+			            <label for="text">&nbsp;&nbsp;&nbsp;推荐人姓名:</label>
+				        <div class="col-sm-10">
+				    		<input type="text" class="form-control"  v-model="name" >
+				        </div>
+				    </div>
+				    <div class="form-group">
+						<label for="text">&nbsp;&nbsp;&nbsp;推荐人电话:</label>
+				        <div class="col-sm-10">
+				     		 <input type="text" class="form-control"  v-model="mobile" >
+				        </div>
+				    </div>
+				    
+				    <div class="form-group">
+						<label for="text">&nbsp;&nbsp;&nbsp;推荐人标识:</label>
+				        <div class="col-sm-10">
+				     		 <input type="text" class="form-control"  v-model="refSign" >
+				        </div>
+				    </div>
+				    
+				    <div class="form-group">
+						<label for="text">&nbsp;&nbsp;&nbsp;返佣百分比:</label>
+				        <div class="col-sm-10">
+				     		 <input type="text" class="form-control"  v-model="commissionRate" >
+				        </div>
+				    </div>
+				   
+				   <div class="form-group">
+						<label for="text">&nbsp;&nbsp;&nbsp;身份证:</label>
+				        <div class="col-sm-10">
+				     		 <input type="text" class="form-control"  @blur="getYeeCustomerNumber" v-model="idCard" >
+				        </div>
+				    </div>
+				    
+				    <div class="form-group">
+						<label for="text">&nbsp;&nbsp;&nbsp;子商户编码:</label>
+				        <div class="col-sm-10">
+				     		 <input type="text" class="form-control"  disabled v-model="yeeCustomerNumber" >
+				        </div>
+				    </div>
+				   
+				   <div class="form-group">
+						<label for="text">&nbsp;&nbsp;&nbsp;结算银行卡:</label>
+				        <div class="col-sm-10">
+				     		 <input type="text" class="form-control"  v-model="ckBankCard" >
+				        </div>
+				    </div>
+				    
+				    <div class="form-group">
+						<label for="text">&nbsp;&nbsp;&nbsp;基础佣金(元):</label>
+				        <div class="col-sm-10">
+				     		 <input type="text" class="form-control"  v-model="basicCommission" >
+				        </div>
+				    </div>
+				   
+				</form>
+				<div class="form-group">
+				        <div class="col-sm-offset-2 col-sm-10">
+				            <button type="submit" class="btn btn-primary btn-sm" @click="add">提交</button>
+				        </div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

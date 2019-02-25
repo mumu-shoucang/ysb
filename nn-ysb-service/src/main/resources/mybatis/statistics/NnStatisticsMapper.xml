@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.statistics.mapper.NnStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.n.ysb.service.statistics.po.NnStatistics" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="STATISTICS_TYPE" property="statisticsType" jdbcType="VARCHAR" />
+    <result column="STATISTICS_DATE" property="statisticsDate" jdbcType="TIMESTAMP" />
+    <result column="STATISTICS_AMT" property="statisticsAmt" jdbcType="DECIMAL" />
+    <result column="TRADE_SUC_COUNT" property="tradeSucCount" jdbcType="DECIMAL" />
+    <result column="REG_USER_COUNT" property="regUserCount" jdbcType="DECIMAL" />
+    <result column="ANTU_USER_COUNT" property="antuUserCount" jdbcType="DECIMAL" />
+    <result column="TRADE_COMMISSTION_RATE" property="tradeCommisstionRate" jdbcType="DECIMAL" />
+    <result column="TRADE_COMMISSTION" property="tradeCommisstion" jdbcType="DECIMAL" />
+    <result column="WITHDRAW_COMMISSTION" property="withdrawCommisstion" jdbcType="DECIMAL" />
+    <result column="YEE_CUSTOMER_NUMBER" property="yeeCustomerNumber" jdbcType="VARCHAR" />
+    <result column="COMMISSION_TRANSFER_STAT" property="commissionTransferStat" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, STATISTICS_TYPE, STATISTICS_DATE, STATISTICS_AMT, TRADE_SUC_COUNT, REG_USER_COUNT, 
+    ANTU_USER_COUNT, TRADE_COMMISSTION_RATE, TRADE_COMMISSTION, WITHDRAW_COMMISSTION, 
+    YEE_CUSTOMER_NUMBER, COMMISSION_TRANSFER_STAT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.n.ysb.service.statistics.po.NnStatisticsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NN_STATISTICS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from NN_STATISTICS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from NN_STATISTICS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.n.ysb.service.statistics.po.NnStatisticsExample" >
+    delete from NN_STATISTICS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.n.ysb.service.statistics.po.NnStatistics" >
+    insert into NN_STATISTICS (ID, STATISTICS_TYPE, STATISTICS_DATE, 
+      STATISTICS_AMT, TRADE_SUC_COUNT, REG_USER_COUNT, 
+      ANTU_USER_COUNT, TRADE_COMMISSTION_RATE, TRADE_COMMISSTION, 
+      WITHDRAW_COMMISSTION, YEE_CUSTOMER_NUMBER, 
+      COMMISSION_TRANSFER_STAT)
+    values (#{id,jdbcType=VARCHAR}, #{statisticsType,jdbcType=VARCHAR}, #{statisticsDate,jdbcType=TIMESTAMP}, 
+      #{statisticsAmt,jdbcType=DECIMAL}, #{tradeSucCount,jdbcType=DECIMAL}, #{regUserCount,jdbcType=DECIMAL}, 
+      #{antuUserCount,jdbcType=DECIMAL}, #{tradeCommisstionRate,jdbcType=DECIMAL}, #{tradeCommisstion,jdbcType=DECIMAL}, 
+      #{withdrawCommisstion,jdbcType=DECIMAL}, #{yeeCustomerNumber,jdbcType=VARCHAR}, 
+      #{commissionTransferStat,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.n.ysb.service.statistics.po.NnStatistics" >
+    insert into NN_STATISTICS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="statisticsType != null" >
+        STATISTICS_TYPE,
+      </if>
+      <if test="statisticsDate != null" >
+        STATISTICS_DATE,
+      </if>
+      <if test="statisticsAmt != null" >
+        STATISTICS_AMT,
+      </if>
+      <if test="tradeSucCount != null" >
+        TRADE_SUC_COUNT,
+      </if>
+      <if test="regUserCount != null" >
+        REG_USER_COUNT,
+      </if>
+      <if test="antuUserCount != null" >
+        ANTU_USER_COUNT,
+      </if>
+      <if test="tradeCommisstionRate != null" >
+        TRADE_COMMISSTION_RATE,
+      </if>
+      <if test="tradeCommisstion != null" >
+        TRADE_COMMISSTION,
+      </if>
+      <if test="withdrawCommisstion != null" >
+        WITHDRAW_COMMISSTION,
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER,
+      </if>
+      <if test="commissionTransferStat != null" >
+        COMMISSION_TRANSFER_STAT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticsType != null" >
+        #{statisticsType,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticsDate != null" >
+        #{statisticsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statisticsAmt != null" >
+        #{statisticsAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeSucCount != null" >
+        #{tradeSucCount,jdbcType=DECIMAL},
+      </if>
+      <if test="regUserCount != null" >
+        #{regUserCount,jdbcType=DECIMAL},
+      </if>
+      <if test="antuUserCount != null" >
+        #{antuUserCount,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeCommisstionRate != null" >
+        #{tradeCommisstionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeCommisstion != null" >
+        #{tradeCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawCommisstion != null" >
+        #{withdrawCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionTransferStat != null" >
+        #{commissionTransferStat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.n.ysb.service.statistics.po.NnStatisticsExample" resultType="java.lang.Integer" >
+    select count(*) from NN_STATISTICS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update NN_STATISTICS
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statisticsType != null" >
+        STATISTICS_TYPE = #{record.statisticsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statisticsDate != null" >
+        STATISTICS_DATE = #{record.statisticsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statisticsAmt != null" >
+        STATISTICS_AMT = #{record.statisticsAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradeSucCount != null" >
+        TRADE_SUC_COUNT = #{record.tradeSucCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.regUserCount != null" >
+        REG_USER_COUNT = #{record.regUserCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.antuUserCount != null" >
+        ANTU_USER_COUNT = #{record.antuUserCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradeCommisstionRate != null" >
+        TRADE_COMMISSTION_RATE = #{record.tradeCommisstionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradeCommisstion != null" >
+        TRADE_COMMISSTION = #{record.tradeCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.withdrawCommisstion != null" >
+        WITHDRAW_COMMISSTION = #{record.withdrawCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commissionTransferStat != null" >
+        COMMISSION_TRANSFER_STAT = #{record.commissionTransferStat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update NN_STATISTICS
+    set ID = #{record.id,jdbcType=VARCHAR},
+      STATISTICS_TYPE = #{record.statisticsType,jdbcType=VARCHAR},
+      STATISTICS_DATE = #{record.statisticsDate,jdbcType=TIMESTAMP},
+      STATISTICS_AMT = #{record.statisticsAmt,jdbcType=DECIMAL},
+      TRADE_SUC_COUNT = #{record.tradeSucCount,jdbcType=DECIMAL},
+      REG_USER_COUNT = #{record.regUserCount,jdbcType=DECIMAL},
+      ANTU_USER_COUNT = #{record.antuUserCount,jdbcType=DECIMAL},
+      TRADE_COMMISSTION_RATE = #{record.tradeCommisstionRate,jdbcType=DECIMAL},
+      TRADE_COMMISSTION = #{record.tradeCommisstion,jdbcType=DECIMAL},
+      WITHDRAW_COMMISSTION = #{record.withdrawCommisstion,jdbcType=DECIMAL},
+      YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      COMMISSION_TRANSFER_STAT = #{record.commissionTransferStat,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.n.ysb.service.statistics.po.NnStatistics" >
+    update NN_STATISTICS
+    <set >
+      <if test="statisticsType != null" >
+        STATISTICS_TYPE = #{statisticsType,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticsDate != null" >
+        STATISTICS_DATE = #{statisticsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statisticsAmt != null" >
+        STATISTICS_AMT = #{statisticsAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeSucCount != null" >
+        TRADE_SUC_COUNT = #{tradeSucCount,jdbcType=DECIMAL},
+      </if>
+      <if test="regUserCount != null" >
+        REG_USER_COUNT = #{regUserCount,jdbcType=DECIMAL},
+      </if>
+      <if test="antuUserCount != null" >
+        ANTU_USER_COUNT = #{antuUserCount,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeCommisstionRate != null" >
+        TRADE_COMMISSTION_RATE = #{tradeCommisstionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeCommisstion != null" >
+        TRADE_COMMISSTION = #{tradeCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawCommisstion != null" >
+        WITHDRAW_COMMISSTION = #{withdrawCommisstion,jdbcType=DECIMAL},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionTransferStat != null" >
+        COMMISSION_TRANSFER_STAT = #{commissionTransferStat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.n.ysb.service.statistics.po.NnStatistics" >
+    update NN_STATISTICS
+    set STATISTICS_TYPE = #{statisticsType,jdbcType=VARCHAR},
+      STATISTICS_DATE = #{statisticsDate,jdbcType=TIMESTAMP},
+      STATISTICS_AMT = #{statisticsAmt,jdbcType=DECIMAL},
+      TRADE_SUC_COUNT = #{tradeSucCount,jdbcType=DECIMAL},
+      REG_USER_COUNT = #{regUserCount,jdbcType=DECIMAL},
+      ANTU_USER_COUNT = #{antuUserCount,jdbcType=DECIMAL},
+      TRADE_COMMISSTION_RATE = #{tradeCommisstionRate,jdbcType=DECIMAL},
+      TRADE_COMMISSTION = #{tradeCommisstion,jdbcType=DECIMAL},
+      WITHDRAW_COMMISSTION = #{withdrawCommisstion,jdbcType=DECIMAL},
+      YEE_CUSTOMER_NUMBER = #{yeeCustomerNumber,jdbcType=VARCHAR},
+      COMMISSION_TRANSFER_STAT = #{commissionTransferStat,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

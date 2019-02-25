@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.n.ysb.service.merchant.mapper.NnMerchantMapper" >
+  <resultMap id="BaseResultMap" type="com.n.ysb.service.merchant.po.NnMerchant" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MERCHANT_CODE" property="merchantCode" jdbcType="VARCHAR" />
+    <result column="LOGIN_MOBILE" property="loginMobile" jdbcType="VARCHAR" />
+    <result column="LOGIN_PWD" property="loginPwd" jdbcType="VARCHAR" />
+    <result column="REF_SIGN" property="refSign" jdbcType="VARCHAR" />
+    <result column="BIND_MOBILE" property="bindMobile" jdbcType="VARCHAR" />
+    <result column="BANK_ACCOUNT_NAME" property="bankAccountName" jdbcType="VARCHAR" />
+    <result column="BANK_ACCOUNT_NO" property="bankAccountNo" jdbcType="VARCHAR" />
+    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="ID_CARD_START" property="idCardStart" jdbcType="TIMESTAMP" />
+    <result column="ID_CARD_END" property="idCardEnd" jdbcType="TIMESTAMP" />
+    <result column="FEE_SET_FLAG" property="feeSetFlag" jdbcType="VARCHAR" />
+    <result column="FEE_SET_TYPE" property="feeSetType" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="YEE_CUSTOMER_NUMBER" property="yeeCustomerNumber" jdbcType="VARCHAR" />
+    <result column="AUTH_DATE" property="authDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MERCHANT_CODE, LOGIN_MOBILE, LOGIN_PWD, REF_SIGN, BIND_MOBILE, BANK_ACCOUNT_NAME, 
+    BANK_ACCOUNT_NO, BANK_NAME, ID_CARD, ID_CARD_START, ID_CARD_END, FEE_SET_FLAG, FEE_SET_TYPE, 
+    CREATE_DATE, YEE_CUSTOMER_NUMBER, AUTH_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.n.ysb.service.merchant.po.NnMerchantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NN_MERCHANT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from NN_MERCHANT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from NN_MERCHANT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.n.ysb.service.merchant.po.NnMerchantExample" >
+    delete from NN_MERCHANT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.n.ysb.service.merchant.po.NnMerchant" >
+    insert into NN_MERCHANT (ID, MERCHANT_CODE, LOGIN_MOBILE, 
+      LOGIN_PWD, REF_SIGN, BIND_MOBILE, 
+      BANK_ACCOUNT_NAME, BANK_ACCOUNT_NO, BANK_NAME, 
+      ID_CARD, ID_CARD_START, ID_CARD_END, 
+      FEE_SET_FLAG, FEE_SET_TYPE, CREATE_DATE, 
+      YEE_CUSTOMER_NUMBER, AUTH_DATE)
+    values (#{id,jdbcType=VARCHAR}, #{merchantCode,jdbcType=VARCHAR}, #{loginMobile,jdbcType=VARCHAR}, 
+      #{loginPwd,jdbcType=VARCHAR}, #{refSign,jdbcType=VARCHAR}, #{bindMobile,jdbcType=VARCHAR}, 
+      #{bankAccountName,jdbcType=VARCHAR}, #{bankAccountNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{idCardStart,jdbcType=TIMESTAMP}, #{idCardEnd,jdbcType=TIMESTAMP}, 
+      #{feeSetFlag,jdbcType=VARCHAR}, #{feeSetType,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{yeeCustomerNumber,jdbcType=VARCHAR}, #{authDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.n.ysb.service.merchant.po.NnMerchant" >
+    insert into NN_MERCHANT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="merchantCode != null" >
+        MERCHANT_CODE,
+      </if>
+      <if test="loginMobile != null" >
+        LOGIN_MOBILE,
+      </if>
+      <if test="loginPwd != null" >
+        LOGIN_PWD,
+      </if>
+      <if test="refSign != null" >
+        REF_SIGN,
+      </if>
+      <if test="bindMobile != null" >
+        BIND_MOBILE,
+      </if>
+      <if test="bankAccountName != null" >
+        BANK_ACCOUNT_NAME,
+      </if>
+      <if test="bankAccountNo != null" >
+        BANK_ACCOUNT_NO,
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="idCardStart != null" >
+        ID_CARD_START,
+      </if>
+      <if test="idCardEnd != null" >
+        ID_CARD_END,
+      </if>
+      <if test="feeSetFlag != null" >
+        FEE_SET_FLAG,
+      </if>
+      <if test="feeSetType != null" >
+        FEE_SET_TYPE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER,
+      </if>
+      <if test="authDate != null" >
+        AUTH_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantCode != null" >
+        #{merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginMobile != null" >
+        #{loginMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="refSign != null" >
+        #{refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="bindMobile != null" >
+        #{bindMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountName != null" >
+        #{bankAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountNo != null" >
+        #{bankAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardStart != null" >
+        #{idCardStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idCardEnd != null" >
+        #{idCardEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feeSetFlag != null" >
+        #{feeSetFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="feeSetType != null" >
+        #{feeSetType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="authDate != null" >
+        #{authDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.n.ysb.service.merchant.po.NnMerchantExample" resultType="java.lang.Integer" >
+    select count(*) from NN_MERCHANT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update NN_MERCHANT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchantCode != null" >
+        MERCHANT_CODE = #{record.merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginMobile != null" >
+        LOGIN_MOBILE = #{record.loginMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginPwd != null" >
+        LOGIN_PWD = #{record.loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refSign != null" >
+        REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bindMobile != null" >
+        BIND_MOBILE = #{record.bindMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccountName != null" >
+        BANK_ACCOUNT_NAME = #{record.bankAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccountNo != null" >
+        BANK_ACCOUNT_NO = #{record.bankAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardStart != null" >
+        ID_CARD_START = #{record.idCardStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.idCardEnd != null" >
+        ID_CARD_END = #{record.idCardEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.feeSetFlag != null" >
+        FEE_SET_FLAG = #{record.feeSetFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeSetType != null" >
+        FEE_SET_TYPE = #{record.feeSetType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authDate != null" >
+        AUTH_DATE = #{record.authDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update NN_MERCHANT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      MERCHANT_CODE = #{record.merchantCode,jdbcType=VARCHAR},
+      LOGIN_MOBILE = #{record.loginMobile,jdbcType=VARCHAR},
+      LOGIN_PWD = #{record.loginPwd,jdbcType=VARCHAR},
+      REF_SIGN = #{record.refSign,jdbcType=VARCHAR},
+      BIND_MOBILE = #{record.bindMobile,jdbcType=VARCHAR},
+      BANK_ACCOUNT_NAME = #{record.bankAccountName,jdbcType=VARCHAR},
+      BANK_ACCOUNT_NO = #{record.bankAccountNo,jdbcType=VARCHAR},
+      BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      ID_CARD_START = #{record.idCardStart,jdbcType=TIMESTAMP},
+      ID_CARD_END = #{record.idCardEnd,jdbcType=TIMESTAMP},
+      FEE_SET_FLAG = #{record.feeSetFlag,jdbcType=VARCHAR},
+      FEE_SET_TYPE = #{record.feeSetType,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      YEE_CUSTOMER_NUMBER = #{record.yeeCustomerNumber,jdbcType=VARCHAR},
+      AUTH_DATE = #{record.authDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.n.ysb.service.merchant.po.NnMerchant" >
+    update NN_MERCHANT
+    <set >
+      <if test="merchantCode != null" >
+        MERCHANT_CODE = #{merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginMobile != null" >
+        LOGIN_MOBILE = #{loginMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        LOGIN_PWD = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="refSign != null" >
+        REF_SIGN = #{refSign,jdbcType=VARCHAR},
+      </if>
+      <if test="bindMobile != null" >
+        BIND_MOBILE = #{bindMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountName != null" >
+        BANK_ACCOUNT_NAME = #{bankAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountNo != null" >
+        BANK_ACCOUNT_NO = #{bankAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardStart != null" >
+        ID_CARD_START = #{idCardStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idCardEnd != null" >
+        ID_CARD_END = #{idCardEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feeSetFlag != null" >
+        FEE_SET_FLAG = #{feeSetFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="feeSetType != null" >
+        FEE_SET_TYPE = #{feeSetType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yeeCustomerNumber != null" >
+        YEE_CUSTOMER_NUMBER = #{yeeCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="authDate != null" >
+        AUTH_DATE = #{authDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.n.ysb.service.merchant.po.NnMerchant" >
+    update NN_MERCHANT
+    set MERCHANT_CODE = #{merchantCode,jdbcType=VARCHAR},
+      LOGIN_MOBILE = #{loginMobile,jdbcType=VARCHAR},
+      LOGIN_PWD = #{loginPwd,jdbcType=VARCHAR},
+      REF_SIGN = #{refSign,jdbcType=VARCHAR},
+      BIND_MOBILE = #{bindMobile,jdbcType=VARCHAR},
+      BANK_ACCOUNT_NAME = #{bankAccountName,jdbcType=VARCHAR},
+      BANK_ACCOUNT_NO = #{bankAccountNo,jdbcType=VARCHAR},
+      BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      ID_CARD_START = #{idCardStart,jdbcType=TIMESTAMP},
+      ID_CARD_END = #{idCardEnd,jdbcType=TIMESTAMP},
+      FEE_SET_FLAG = #{feeSetFlag,jdbcType=VARCHAR},
+      FEE_SET_TYPE = #{feeSetType,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      YEE_CUSTOMER_NUMBER = #{yeeCustomerNumber,jdbcType=VARCHAR},
+      AUTH_DATE = #{authDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
